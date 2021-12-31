@@ -1,22 +1,21 @@
 server:
-  port: 8080
+  port: 8081
 spring:
+  application:
+    name: customer
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
       javax:
         persistence:
           validation:
             mode: none
+      show_sql: true
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/product
-    username: postgres
-    password: 123123
-
-
-email:
-  username: ####
-  password: ####
+    url: jdbc:postgresql://localhost:5432/customer
+    username: 'postgres'
+    password: '123123'
