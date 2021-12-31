@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: product
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+      javax:
+        persistence:
+          validation:
+            mode: none
+      show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/product
+    password: 123123
+
+
+email:
+  username: ####
+  password: ####
