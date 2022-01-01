@@ -10,13 +10,14 @@ import java.time.LocalDateTime;
 public class CustomerMapper {
     public CustomerDto customerToCustomerDto(Customer customer) {
         return new CustomerDto(customer.getId(), customer.getUserName(),
-                customer.getName(), customer.getEmail(),
-                customer.getPhoneNumber());
+                customer.getName(), customer.getGender(),
+                customer.getEmail(), customer.getPhoneNumber());
     }
 
     public Customer customerDtoToCustomer(CustomerDto customerDto) {
         return new Customer(customerDto.getId(), customerDto.getUserName(),
-                customerDto.getName(), customerDto.getEmail(),
-                customerDto.getPhoneNumber(), LocalDateTime.now());
+                customerDto.getName(), customerDto.getGender(),
+                customerDto.getEmail(), customerDto.getPhoneNumber(),
+                LocalDateTime.now());
     }
 }

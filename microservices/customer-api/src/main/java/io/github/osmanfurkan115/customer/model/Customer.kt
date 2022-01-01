@@ -23,6 +23,9 @@ data class Customer constructor(
     @NotBlank
     var name: String,
 
+    @Enumerated(EnumType.STRING)
+    var gender: Gender,
+
     @Email
     @Column(unique = true)
     var email: String,

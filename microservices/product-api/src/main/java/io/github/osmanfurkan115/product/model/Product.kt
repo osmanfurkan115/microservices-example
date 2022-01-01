@@ -26,6 +26,9 @@ data class Product constructor(
 
     var stockAmount: Int,
 
+    @NotNull
+    var ownerId: Long,
+
     @CreatedDate
     val createdDate: LocalDateTime,
 

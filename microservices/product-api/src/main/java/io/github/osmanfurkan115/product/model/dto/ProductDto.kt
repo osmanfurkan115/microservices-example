@@ -11,6 +11,7 @@ data class ProductDto(
     val imageLink: String,
     @field:NotNull val price: BigDecimal = BigDecimal.ZERO,
     val stockAmount: Int,
+    @NotNull val ownerId: Long,
     val createdDate: LocalDateTime,
-    val lastModifiedDate: LocalDateTime
-) : Serializable
+    val lastModifiedDate: LocalDateTime,
+    ) : Serializable
