@@ -1,6 +1,7 @@
 package io.github.osmanfurkan115.product.model
 
 import org.hibernate.Hibernate
+import org.hibernate.validator.constraints.URL
 import org.jetbrains.annotations.NotNull
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -17,6 +18,7 @@ data class Product constructor(
 
     var productName: String,
 
+    @URL
     var imageLink: String,
 
     @NotNull
