@@ -14,4 +14,4 @@ data class ProductDto(
     @NotNull val ownerId: Long,
     val createdDate: LocalDateTime,
     val lastModifiedDate: LocalDateTime,
-    ) : Serializable
+) : Serializable

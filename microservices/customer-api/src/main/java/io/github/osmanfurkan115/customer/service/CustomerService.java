@@ -30,7 +30,7 @@ public class CustomerService {
         return customerMapper.customerToCustomerDto(customerRepository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
-    public CustomerDto saveProduct(CustomerDto productDto) {
+    public CustomerDto saveCustomer(CustomerDto productDto) {
         return customerMapper.customerToCustomerDto(customerRepository.save(customerMapper.customerDtoToCustomer(productDto)));
     }
 }

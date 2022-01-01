@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDto> saveProduct(@RequestBody @Valid CustomerDto customerDto) {
-        return ResponseEntity.ok(customerService.saveProduct(customerDto));
+    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody @Valid CustomerDto customerDto) {
+        return ResponseEntity.ok(customerService.saveCustomer(customerDto));
     }
 }
