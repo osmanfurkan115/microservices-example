@@ -27,6 +27,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
+    @GetMapping("/filter/{productName}")
+    public ResponseEntity<Page<ProductDto>> getProductByName(@PathVariable String productName, @RequestParam int page,
+                                                             @RequestParam int size) {
+        return ResponseEntity.ok(productService.getProductsByName(productName, page, size));
+    }
+
     @PostMapping
     public ResponseEntity<ProductDto> saveProduct(@RequestBody @Valid ProductDto productDto) {
         return ResponseEntity.ok(productService.saveProduct(productDto));

@@ -12,11 +12,4 @@ public class ProductMapper {
                 product.getStockAmount(), product.getOwnerId(),
                 product.getCreatedDate(), product.getLastModifiedDate());
     }
-
-    public Product productDtoToProduct(ProductDto productDto) {
-        return new Product(productDto.getId(), productDto.getProductName(),
-                productDto.getImageLink(), productDto.getPrice(),
-                productDto.getStockAmount(), productDto.getOwnerId(),
-                productDto.getCreatedDate(), productDto.getLastModifiedDate());
-    }
 }

@@ -4,7 +4,6 @@ import io.github.osmanfurkan115.customer.model.Customer;
 import io.github.osmanfurkan115.customer.model.dto.CustomerDto;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 
 @Component
 public class CustomerMapper {
@@ -12,12 +11,5 @@ public class CustomerMapper {
         return new CustomerDto(customer.getId(), customer.getUserName(),
                 customer.getName(), customer.getGender(),
                 customer.getEmail(), customer.getPhoneNumber());
-    }
-
-    public Customer customerDtoToCustomer(CustomerDto customerDto) {
-        return new Customer(customerDto.getId(), customerDto.getUserName(),
-                customerDto.getName(), customerDto.getGender(),
-                customerDto.getEmail(), customerDto.getPhoneNumber(),
-                LocalDateTime.now());
     }
 }
