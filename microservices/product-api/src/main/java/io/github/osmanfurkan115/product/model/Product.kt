@@ -18,6 +18,10 @@ data class Product constructor(
 
     var productName: String,
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = [CascadeType.PERSIST])
+    @JoinColumn(name = "category_id")
+    var category: Category?,
+
     @URL
     var imageLink: String,
 

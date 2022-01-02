@@ -10,6 +10,7 @@ public class CustomerMapper {
     public CustomerDto customerToCustomerDto(Customer customer) {
         return new CustomerDto(customer.getId(), customer.getUserName(),
                 customer.getName(), customer.getGender(),
-                customer.getEmail(), customer.getPhoneNumber());
+                customer.getEmail(), customer.getPassword(),
+                customer.getPhoneNumber());
     }
 }

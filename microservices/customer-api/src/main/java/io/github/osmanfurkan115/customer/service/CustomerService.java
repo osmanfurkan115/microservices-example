@@ -35,8 +35,8 @@ public class CustomerService {
     public CustomerDto saveCustomer(CustomerDto customerDto) {
         final Customer customer = new Customer(customerDto.getId(), customerDto.getUserName(),
                 customerDto.getName(), customerDto.getGender(),
-                customerDto.getEmail(), customerDto.getPhoneNumber(),
-                LocalDateTime.now());
+                customerDto.getEmail(), customerDto.getPassword(),
+                customerDto.getPhoneNumber(), LocalDateTime.now());
         return customerMapper.customerToCustomerDto(customerRepository.save(customer));
     }
 }

@@ -30,6 +30,9 @@ data class Customer constructor(
     @Column(unique = true)
     var email: String,
 
+    @Size(min = 6)
+    var password: String,
+
     @PhoneNumber
     @Column(unique = true)
     var phoneNumber: String,

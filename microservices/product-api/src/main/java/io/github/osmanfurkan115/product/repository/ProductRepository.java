@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.productName LIKE %:productName%")
     Optional<Page<Product>> findAllByProductNameIsLike(@Param("productName") String productName, Pageable pageable);
+
+    Optional<Page<Product>> findAllByCategory_Id(int categoryId, Pageable pageable);
 }

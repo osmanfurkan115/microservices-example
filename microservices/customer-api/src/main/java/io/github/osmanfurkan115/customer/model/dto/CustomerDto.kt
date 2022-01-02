@@ -15,5 +15,6 @@ data class CustomerDto(
     @field:NotBlank val name: String,
     @Enumerated(EnumType.STRING) var gender: Gender,
     @field:Email val email: String,
+    @field:Size(min = 6) val password: String,
     @PhoneNumber val phoneNumber: String,
 ) : Serializable

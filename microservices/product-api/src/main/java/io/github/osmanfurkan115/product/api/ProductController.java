@@ -1,5 +1,6 @@
 package io.github.osmanfurkan115.product.api;
 
+import io.github.osmanfurkan115.product.model.dto.CreateProductRequest;
 import io.github.osmanfurkan115.product.model.dto.ProductDto;
 import io.github.osmanfurkan115.product.service.ProductService;
 import org.springframework.data.domain.Page;
@@ -33,8 +34,14 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductsByName(productName, page, size));
     }
 
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<Page<ProductDto>> getProductByCategory(@PathVariable int categoryId, @RequestParam int page,
+                                                             @RequestParam int size) {
+        return ResponseEntity.ok(productService.getProductsByCategoryId(categoryId, page, size));
+    }
+
     @PostMapping
-    public ResponseEntity<ProductDto> saveProduct(@RequestBody @Valid ProductDto productDto) {
-        return ResponseEntity.ok(productService.saveProduct(productDto));
+    public ResponseEntity<ProductDto> saveProduct(@RequestBody @Valid CreateProductRequest createProductRequest) {
+        return ResponseEntity.ok(productService.saveProduct(createProductRequest));
     }
 }
