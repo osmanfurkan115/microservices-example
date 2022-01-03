@@ -28,6 +28,6 @@ class ProductMailServiceTest {
     void sendProductPurchaseMail() {
         final Product product = new Product();
         product.setProductName("Test product");
-        assertDoesNotThrow(() -> productMailService.sendProductPurchaseMail(product));
+        assertDoesNotThrow(() -> productMailService.sendProductPurchaseMail("osmanfurkan115@gmail.com", product));
     }
 }

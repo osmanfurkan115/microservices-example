@@ -19,8 +19,8 @@ public class ProductMailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendProductPurchaseMail(Product product) throws MessagingException { //TODO: add the buyer and product
-        sendMailMultipart(new SendEmailRequest("osmanfurkan115@gmail.com", "Product Purchase",
+    public void sendProductPurchaseMail(String email, Product product) throws MessagingException { //TODO: add the buyer and product
+        sendMailMultipart(new SendEmailRequest(email, "Product Purchase",
                 "You purchased a product named " + product.getProductName()), null);
     }
 
