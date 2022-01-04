@@ -2,10 +2,8 @@ package io.github.osmanfurkan115.product.model.dto
 
 import java.io.Serializable
 import java.math.BigDecimal
-import javax.validation.constraints.NotNull
 
-class CreateProductRequest(
-    @NotNull val id: Long,
+class UpdateProductRequest(
     productName: String,
     categoryId: Int,
     imageLink: String,

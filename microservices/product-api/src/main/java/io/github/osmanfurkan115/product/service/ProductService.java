@@ -3,6 +3,7 @@ package io.github.osmanfurkan115.product.service;
 import io.github.osmanfurkan115.product.model.Product;
 import io.github.osmanfurkan115.product.model.dto.CreateProductRequest;
 import io.github.osmanfurkan115.product.model.dto.ProductDto;
+import io.github.osmanfurkan115.product.model.dto.UpdateProductRequest;
 import io.github.osmanfurkan115.product.model.dto.mapper.ProductMapper;
 import io.github.osmanfurkan115.product.repository.ProductRepository;
 import org.springframework.data.domain.*;
@@ -30,7 +31,11 @@ public class ProductService {
     }
 
     public ProductDto getProductById(long id) {
-        return productMapper.productToProductDto(productRepository.findById(id).orElseThrow(EntityNotFoundException::new));
+        return productMapper.productToProductDto(findProductById(id));
+    }
+
+    private Product findProductById(long id) {
+        return productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public Page<ProductDto> getProductsByName(String productName, int page, int size) {
@@ -50,6 +55,20 @@ public class ProductService {
                 categoryService.getCategoryById(productRequest.getCategoryId()), productRequest.getImageLink(),
                 productRequest.getPrice(), productRequest.getStockAmount(),
                 productRequest.getOwnerId(), LocalDateTime.now(), LocalDateTime.now());
+        return productMapper.productToProductDto(productRepository.save(product));
+    }
+
+    public ProductDto updateProduct(long id, UpdateProductRequest productRequest) {
+        final Product product = findProductById(id);
+
+        product.setProductName(productRequest.getProductName());
+        product.setImageLink(productRequest.getImageLink());
+        product.setPrice(productRequest.getPrice());
+        product.setStockAmount(productRequest.getStockAmount());
+        product.setCategory(categoryService.getCategoryById(productRequest.getCategoryId()));
+        product.setLastModifiedDate(LocalDateTime.now());
+        product.setOwnerId(productRequest.getOwnerId());
+
         return productMapper.productToProductDto(productRepository.save(product));
     }
 }
