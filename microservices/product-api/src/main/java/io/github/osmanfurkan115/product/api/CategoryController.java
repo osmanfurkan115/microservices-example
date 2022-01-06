@@ -1,6 +1,7 @@
 package io.github.osmanfurkan115.product.api;
 
 import io.github.osmanfurkan115.product.model.Category;
+import io.github.osmanfurkan115.product.model.dto.UpdateCategoryRequest;
 import io.github.osmanfurkan115.product.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,12 @@ public class CategoryController {
 
 
     @PostMapping
-    public ResponseEntity<Category> saveProduct(@RequestBody @Valid Category category) {
-        return ResponseEntity.ok(categoryService.save(category));
+    public ResponseEntity<Category> saveCategory(@RequestBody @Valid Category category) {
+        return ResponseEntity.ok(categoryService.saveCategory(category));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Category> updateCategory(@PathVariable int id, @RequestBody UpdateCategoryRequest categoryRequest) {
+        return ResponseEntity.ok(categoryService.updateCategory(id, categoryRequest));
     }
 }

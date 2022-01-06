@@ -1,5 +1,6 @@
 package io.github.osmanfurkan115.product.model
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import org.hibernate.Hibernate
 import org.hibernate.validator.constraints.URL
 import org.jetbrains.annotations.NotNull
@@ -20,6 +21,7 @@ data class Product constructor(
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = [CascadeType.PERSIST])
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     var category: Category?,
 
     @URL

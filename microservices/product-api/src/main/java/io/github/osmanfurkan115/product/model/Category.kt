@@ -1,5 +1,6 @@
 package io.github.osmanfurkan115.product.model
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.Hibernate
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
@@ -19,7 +20,8 @@ data class Category constructor(
     var description: String,
 
     @OneToMany(cascade = [CascadeType.PERSIST], fetch = FetchType.LAZY, mappedBy = "category")
-    var products: List<Product>?
+    @JsonManagedReference
+    var products: MutableList<Product>?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
