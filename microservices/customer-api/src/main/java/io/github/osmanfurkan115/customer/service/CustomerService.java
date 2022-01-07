@@ -29,14 +29,19 @@ public class CustomerService {
     }
 
     public CustomerDto getCustomerById(Long id) {
-        return customerMapper.customerToCustomerDto(customerRepository.findById(id).orElseThrow(EntityNotFoundException::new));
+        return customerMapper.customerToCustomerDto(findCustomerById(id));
+    }
+
+    protected Customer findCustomerById(Long id) {
+        return customerRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public CustomerDto saveCustomer(CustomerDto customerDto) {
         final Customer customer = new Customer(customerDto.getId(), customerDto.getUserName(),
                 customerDto.getName(), customerDto.getGender(),
                 customerDto.getEmail(), customerDto.getPassword(),
-                customerDto.getPhoneNumber(), LocalDateTime.now());
+                customerDto.getPhoneNumber(), customerDto.getAddress(),
+                LocalDateTime.now());
         return customerMapper.customerToCustomerDto(customerRepository.save(customer));
     }
 }

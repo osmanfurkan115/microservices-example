@@ -11,6 +11,6 @@ public class CustomerMapper {
         return new CustomerDto(customer.getId(), customer.getUserName(),
                 customer.getName(), customer.getGender(),
                 customer.getEmail(), customer.getPassword(),
-                customer.getPhoneNumber());
+                customer.getPhoneNumber(), customer.getAddress());
     }
 }

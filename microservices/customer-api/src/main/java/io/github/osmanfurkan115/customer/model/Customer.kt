@@ -1,5 +1,6 @@
 package io.github.osmanfurkan115.customer.model
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import io.github.osmanfurkan115.customer.validation.annotation.PhoneNumber
 import org.hibernate.Hibernate
 import org.springframework.data.annotation.CreatedDate
@@ -9,6 +10,7 @@ import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
+import kotlin.collections.HashSet
 
 @Entity
 @Table(name = "customers")
@@ -37,6 +39,10 @@ data class Customer constructor(
     @Column(unique = true)
     var phoneNumber: String,
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "owner")
+    @JsonBackReference
+    var address: Set<Address> = HashSet(),
+
     @CreatedDate
     val createdDate: LocalDateTime
 
@@ -46,14 +52,16 @@ data class Customer constructor(
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
         other as Customer
 
-        return id == other.id
+        return id != null && id == other.id
     }
 
     override fun hashCode(): Int = javaClass.hashCode()
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , userName = $userName , name = $name , email = $email , phoneNumber = $phoneNumber )"
+        return this::class.simpleName + "(id = $id , userName = $userName , name = $name , gender = $gender ," +
+                " email = $email , password = $password , phoneNumber = $phoneNumber , createdDate = $createdDate )"
     }
+
 }
 
