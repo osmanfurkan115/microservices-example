@@ -1,5 +1,6 @@
 package io.github.osmanfurkan115.customer.service;
 
+import io.github.osmanfurkan115.customer.model.Coupon;
 import io.github.osmanfurkan115.customer.model.Customer;
 import io.github.osmanfurkan115.customer.model.dto.CustomerDto;
 import io.github.osmanfurkan115.customer.model.dto.mapper.CustomerMapper;
@@ -17,10 +18,12 @@ import java.time.LocalDateTime;
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final CouponService couponService;
 
-    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper, CouponService couponService) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
+        this.couponService = couponService;
     }
 
     public Page<CustomerDto> getAll(int page, int size) {
@@ -41,7 +44,14 @@ public class CustomerService {
                 customerDto.getName(), customerDto.getGender(),
                 customerDto.getEmail(), customerDto.getPassword(),
                 customerDto.getPhoneNumber(), customerDto.getAddress(),
-                LocalDateTime.now());
+                customerDto.getCoupons(), LocalDateTime.now());
+        return customerMapper.customerToCustomerDto(customerRepository.save(customer));
+    }
+
+    public CustomerDto addCouponToCustomer(long customerId, int couponId) {
+        final Customer customer = findCustomerById(customerId);
+        final Coupon coupon = couponService.getCouponById(couponId);
+        customer.getCoupons().add(coupon);
         return customerMapper.customerToCustomerDto(customerRepository.save(customer));
     }
 }

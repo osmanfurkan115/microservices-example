@@ -31,4 +31,9 @@ public class CustomerController {
     public ResponseEntity<CustomerDto> saveCustomer(@RequestBody @Valid CustomerDto customerDto) {
         return ResponseEntity.ok(customerService.saveCustomer(customerDto));
     }
+
+    @PutMapping("/{customerId}/coupon/{couponId}")
+    public ResponseEntity<CustomerDto> addCouponToCustomer(@PathVariable long customerId, @PathVariable int couponId) {
+        return ResponseEntity.ok(customerService.addCouponToCustomer(customerId, couponId));
+    }
 }

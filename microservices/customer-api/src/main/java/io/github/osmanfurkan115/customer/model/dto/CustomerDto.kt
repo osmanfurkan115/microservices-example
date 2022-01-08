@@ -1,6 +1,7 @@
 package io.github.osmanfurkan115.customer.model.dto
 
 import io.github.osmanfurkan115.customer.model.Address
+import io.github.osmanfurkan115.customer.model.Coupon
 import io.github.osmanfurkan115.customer.model.Gender
 import io.github.osmanfurkan115.customer.validation.annotation.PhoneNumber
 import java.io.Serializable
@@ -18,5 +19,6 @@ data class CustomerDto(
     @field:Email val email: String,
     @field:Size(min = 6) val password: String,
     @PhoneNumber val phoneNumber: String,
-    val address: Set<Address>
+    val address: Set<Address>,
+    val coupons: Set<Coupon>
 ) : Serializable

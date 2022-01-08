@@ -43,6 +43,13 @@ data class Customer constructor(
     @JsonBackReference
     var address: Set<Address> = HashSet(),
 
+    @ManyToMany
+    @JoinTable(name = "customer_coupons",
+        joinColumns = [JoinColumn(name = "customer_id")],
+        inverseJoinColumns = [JoinColumn(name = "coupon_id")]
+    )
+    var coupons: Set<Coupon> = HashSet(),
+
     @CreatedDate
     val createdDate: LocalDateTime
 
