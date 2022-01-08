@@ -11,7 +11,8 @@ public class ProductMapper {
         final Category category = product.getCategory();
         final String categoryName = category != null ? category.getCategoryName() : "Category not found";
         return new ProductDto(product.getId(), product.getProductName(),
-                categoryName, product.getImageLink(), product.getPrice(),
+                categoryName, product.getReviews(),
+                product.getImageLink(), product.getPrice(),
                 product.getStockAmount(), product.getOwnerId(),
                 product.getCreatedDate(), product.getLastModifiedDate());
     }

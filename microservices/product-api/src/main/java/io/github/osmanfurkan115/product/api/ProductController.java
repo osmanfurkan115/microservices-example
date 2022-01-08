@@ -2,6 +2,7 @@ package io.github.osmanfurkan115.product.api;
 
 import io.github.osmanfurkan115.product.model.dto.CreateProductRequest;
 import io.github.osmanfurkan115.product.model.dto.ProductDto;
+import io.github.osmanfurkan115.product.model.dto.ReviewRequest;
 import io.github.osmanfurkan115.product.model.dto.UpdateProductRequest;
 import io.github.osmanfurkan115.product.service.ProductService;
 import org.springframework.data.domain.Page;
@@ -49,5 +50,10 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<ProductDto> updateProduct(@PathVariable long id, @RequestBody UpdateProductRequest productRequest) {
         return ResponseEntity.ok(productService.updateProduct(id, productRequest));
+    }
+
+    @PutMapping("/{id}/review")
+    public ResponseEntity<ProductDto> addReview(@PathVariable long id, @RequestBody @Valid ReviewRequest review) {
+        return ResponseEntity.ok(productService.addReview(id, review));
     }
 }

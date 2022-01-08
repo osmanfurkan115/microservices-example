@@ -1,8 +1,10 @@
 package io.github.osmanfurkan115.product.service;
 
 import io.github.osmanfurkan115.product.model.Product;
+import io.github.osmanfurkan115.product.model.Review;
 import io.github.osmanfurkan115.product.model.dto.CreateProductRequest;
 import io.github.osmanfurkan115.product.model.dto.ProductDto;
+import io.github.osmanfurkan115.product.model.dto.ReviewRequest;
 import io.github.osmanfurkan115.product.model.dto.UpdateProductRequest;
 import io.github.osmanfurkan115.product.model.dto.mapper.ProductMapper;
 import io.github.osmanfurkan115.product.repository.ProductRepository;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 @Service
 public class ProductService {
@@ -26,7 +29,7 @@ public class ProductService {
     }
 
     public Page<ProductDto> getAll(int page, int size) {
-        final Pageable pageable = PageRequest.of(page,size, Sort.by("price").ascending());
+        final Pageable pageable = PageRequest.of(page, size, Sort.by("price").ascending());
         return productRepository.findAll(pageable).map(productMapper::productToProductDto);
     }
 
@@ -39,22 +42,23 @@ public class ProductService {
     }
 
     public Page<ProductDto> getProductsByName(String productName, int page, int size) {
-        final Pageable pageable = PageRequest.of(page,size, Sort.by("productName").ascending());
+        final Pageable pageable = PageRequest.of(page, size, Sort.by("productName").ascending());
         return productRepository.findAllByProductNameIsLike(productName, pageable)
                 .orElseThrow(EntityNotFoundException::new).map(productMapper::productToProductDto);
     }
 
     public Page<ProductDto> getProductsByCategoryId(int categoryId, int page, int size) {
-        final Pageable pageable = PageRequest.of(page,size, Sort.by("productName").ascending());
+        final Pageable pageable = PageRequest.of(page, size, Sort.by("productName").ascending());
         return productRepository.findAllByCategory_Id(categoryId, pageable)
                 .orElseThrow(EntityNotFoundException::new).map(productMapper::productToProductDto);
     }
 
     public ProductDto saveProduct(CreateProductRequest productRequest) {
         final Product product = new Product(productRequest.getId(), productRequest.getProductName(),
-                categoryService.getCategoryById(productRequest.getCategoryId()), productRequest.getImageLink(),
-                productRequest.getPrice(), productRequest.getStockAmount(),
-                productRequest.getOwnerId(), LocalDateTime.now(), LocalDateTime.now());
+                categoryService.getCategoryById(productRequest.getCategoryId()), new HashSet<>(),
+                productRequest.getImageLink(), productRequest.getPrice(),
+                productRequest.getStockAmount(), productRequest.getOwnerId(),
+                LocalDateTime.now(), LocalDateTime.now());
         return productMapper.productToProductDto(productRepository.save(product));
     }
 
@@ -69,6 +73,16 @@ public class ProductService {
         product.setLastModifiedDate(LocalDateTime.now());
         product.setOwnerId(productRequest.getOwnerId());
 
+        return productMapper.productToProductDto(productRepository.save(product));
+    }
+
+    public ProductDto addReview(long productId, ReviewRequest reviewRequest) {
+        final Product product = findProductById(productId);
+        final Review review = new Review(reviewRequest.getId(), reviewRequest.getComment(),
+                reviewRequest.getRate(), reviewRequest.getCustomerId(),
+                product, LocalDateTime.now()
+        );
+        product.getReviews().add(review);
         return productMapper.productToProductDto(productRepository.save(product));
     }
 }

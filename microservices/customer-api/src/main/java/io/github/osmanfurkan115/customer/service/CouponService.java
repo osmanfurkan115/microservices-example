@@ -1,7 +1,6 @@
 package io.github.osmanfurkan115.customer.service;
 
 import io.github.osmanfurkan115.customer.model.Coupon;
-import io.github.osmanfurkan115.customer.model.Customer;
 import io.github.osmanfurkan115.customer.repository.CouponRepository;
 import org.springframework.stereotype.Service;
 

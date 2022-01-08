@@ -1,6 +1,7 @@
 package io.github.osmanfurkan115.product.model
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.Hibernate
 import org.hibernate.validator.constraints.URL
 import org.jetbrains.annotations.NotNull
@@ -23,6 +24,10 @@ data class Product constructor(
     @JoinColumn(name = "category_id")
     @JsonBackReference
     var category: Category?,
+
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "product")
+    @JsonManagedReference
+    var reviews: Set<Review> = HashSet(),
 
     @URL
     var imageLink: String,
