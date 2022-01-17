@@ -2,29 +2,38 @@ package io.github.osmanfurkan115.product.service;
 
 import io.github.osmanfurkan115.product.model.Product;
 import io.github.osmanfurkan115.product.model.Review;
-import io.github.osmanfurkan115.product.model.dto.CreateProductRequest;
-import io.github.osmanfurkan115.product.model.dto.ProductDto;
-import io.github.osmanfurkan115.product.model.dto.ReviewRequest;
-import io.github.osmanfurkan115.product.model.dto.UpdateProductRequest;
+import io.github.osmanfurkan115.product.model.dto.*;
 import io.github.osmanfurkan115.product.model.dto.mapper.ProductMapper;
+import io.github.osmanfurkan115.product.model.dto.mapper.ReviewMapper;
 import io.github.osmanfurkan115.product.repository.ProductRepository;
-import org.springframework.data.domain.*;
+import io.github.osmanfurkan115.product.repository.ReviewRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
     private final ProductMapper productMapper;
+    private final ReviewMapper reviewMapper;
     private final CategoryService categoryService;
 
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper,
-                          CategoryService categoryService) {
+    public ProductService(ProductRepository productRepository, ReviewRepository reviewRepository,
+                          ProductMapper productMapper, ReviewMapper reviewMapper, CategoryService categoryService) {
         this.productRepository = productRepository;
+        this.reviewRepository = reviewRepository;
         this.productMapper = productMapper;
+        this.reviewMapper = reviewMapper;
         this.categoryService = categoryService;
     }
 
@@ -80,9 +89,16 @@ public class ProductService {
         final Product product = findProductById(productId);
         final Review review = new Review(reviewRequest.getId(), reviewRequest.getComment(),
                 reviewRequest.getRate(), reviewRequest.getCustomerId(),
-                product, LocalDateTime.now()
+                product, false,
+                LocalDateTime.now()
         );
         product.getReviews().add(review);
         return productMapper.productToProductDto(productRepository.save(product));
+    }
+
+    public List<ReviewDto> getReviews(long productId) {
+        final Optional<List<Review>> reviews = reviewRepository.findByProductId(productId);
+        return reviews.orElseThrow(EntityNotFoundException::new)
+                .stream().map(reviewMapper::reviewToReviewDto).collect(Collectors.toList());
     }
 }

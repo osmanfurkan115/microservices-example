@@ -5,12 +5,10 @@ import io.github.osmanfurkan115.customer.validation.annotation.PhoneNumber
 import org.hibernate.Hibernate
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
-import kotlin.collections.HashSet
 
 @Entity
 @Table(name = "customers")

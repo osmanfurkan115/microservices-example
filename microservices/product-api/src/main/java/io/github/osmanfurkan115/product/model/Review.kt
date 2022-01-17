@@ -30,6 +30,9 @@ data class Review constructor(
     @JsonBackReference
     val product: Product,
 
+    @NotNull
+    var active: Boolean = false,
+
     @CreatedDate
     val createdDate: LocalDateTime
 

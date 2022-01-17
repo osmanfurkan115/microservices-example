@@ -1,15 +1,13 @@
 package io.github.osmanfurkan115.product.api;
 
-import io.github.osmanfurkan115.product.model.dto.CreateProductRequest;
-import io.github.osmanfurkan115.product.model.dto.ProductDto;
-import io.github.osmanfurkan115.product.model.dto.ReviewRequest;
-import io.github.osmanfurkan115.product.model.dto.UpdateProductRequest;
+import io.github.osmanfurkan115.product.model.dto.*;
 import io.github.osmanfurkan115.product.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/product")
@@ -55,5 +53,10 @@ public class ProductController {
     @PutMapping("/{id}/review")
     public ResponseEntity<ProductDto> addReview(@PathVariable long id, @RequestBody @Valid ReviewRequest review) {
         return ResponseEntity.ok(productService.addReview(id, review));
+    }
+
+    @GetMapping("/{id}/review")
+    public ResponseEntity<List<ReviewDto>> getReviews(@PathVariable long id) {
+        return ResponseEntity.ok(productService.getReviews(id));
     }
 }
