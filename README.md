@@ -1,0 +1,2 @@
+# microservices-example
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/97ecf3dd9cb44cc99af9de2ccc4c2112)](https://app.codacy.com/gh/osmanfurkan115/microservices-example?utm_source=github.com&utm_medium=referral&utm_content=osmanfurkan115/microservices-example&utm_campaign=Badge_Grade_Settings)
