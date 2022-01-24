@@ -58,7 +58,7 @@ public class ProductService {
 
     public Page<ProductDto> getProductsByCategoryId(int categoryId, int page, int size) {
         final Pageable pageable = PageRequest.of(page, size, Sort.by("productName").ascending());
-        return productRepository.findAllByCategory_Id(categoryId, pageable)
+        return productRepository.findAllByCategoryId(categoryId, pageable)
                 .orElseThrow(EntityNotFoundException::new).map(productMapper::productToProductDto);
     }
 
