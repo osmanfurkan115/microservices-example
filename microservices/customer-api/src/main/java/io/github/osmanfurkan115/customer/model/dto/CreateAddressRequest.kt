@@ -8,5 +8,5 @@ class CreateAddressRequest(
     @NotNull val id: Int,
     @NotBlank val addressName: String,
     @NotBlank val address: String,
-    @NotNull val customerId: Long
+    @NotNull val customerId: Long,
 )

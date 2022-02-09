@@ -2,7 +2,6 @@ package io.github.osmanfurkan115.customer.model
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import io.github.osmanfurkan115.customer.validation.annotation.PhoneNumber
-import org.hibernate.Hibernate
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -49,24 +48,6 @@ data class Customer constructor(
     var coupons: Set<Coupon> = HashSet(),
 
     @CreatedDate
-    val createdDate: LocalDateTime
-
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Customer
-
-        return id != null && id == other.id
-    }
-
-    override fun hashCode(): Int = javaClass.hashCode()
-
-    @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(id = $id , userName = $userName , name = $name , gender = $gender ," +
-                " email = $email , password = $password , phoneNumber = $phoneNumber , createdDate = $createdDate )"
-    }
-
-}
+    val createdDate: LocalDateTime,
+)
 

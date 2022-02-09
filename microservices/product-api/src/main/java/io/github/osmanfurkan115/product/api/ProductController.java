@@ -20,7 +20,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductDto>> getProducts(@RequestParam int page, @RequestParam int size) {
-        return ResponseEntity.ok(productService.getAll(page,size));
+        return ResponseEntity.ok(productService.getAll(page, size));
     }
 
     @GetMapping("/{id}")
@@ -36,7 +36,7 @@ public class ProductController {
 
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<Page<ProductDto>> getProductByCategory(@PathVariable int categoryId, @RequestParam int page,
-                                                             @RequestParam int size) {
+                                                                 @RequestParam int size) {
         return ResponseEntity.ok(productService.getProductsByCategoryId(categoryId, page, size));
     }
 

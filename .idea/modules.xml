@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/microservices/customer-api/customer-api.iml" filepath="$PROJECT_DIR$/microservices/customer-api/customer-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservices/email-service/email-service.iml" filepath="$PROJECT_DIR$/microservices/email-service/email-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservices/microservices.iml" filepath="$PROJECT_DIR$/microservices/microservices.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservices/product-api/product-api.iml" filepath="$PROJECT_DIR$/microservices/product-api/product-api.iml" />
     </modules>

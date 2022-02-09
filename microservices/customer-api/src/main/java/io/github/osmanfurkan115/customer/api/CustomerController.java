@@ -19,7 +19,7 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<Page<CustomerDto>> getCustomers(@RequestParam int page, @RequestParam int size) {
-        return ResponseEntity.ok(customerService.getAll(page,size));
+        return ResponseEntity.ok(customerService.getAll(page, size));
     }
 
     @GetMapping("/{id}")

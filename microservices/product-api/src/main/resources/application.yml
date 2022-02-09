@@ -19,8 +19,3 @@ spring:
     username: postgres
     url: jdbc:postgresql://localhost:5432/product
     password: 123123
-
-
-email:
-  username: ####
-  password: ####

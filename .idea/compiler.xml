@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="product-api" />
         <module name="customer-api" />
+        <module name="email-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="customer-api" target="8" />
+      <module name="email-service" target="1.8" />
       <module name="microservices" target="8" />
       <module name="product-api" target="8" />
     </bytecodeTargetLevel>
@@ -19,6 +21,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="customer-api" options="" />
+      <module name="email-service" options="-parameters" />
       <module name="product-api" options="" />
     </option>
   </component>

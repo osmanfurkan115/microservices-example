@@ -20,5 +20,5 @@ data class CustomerDto(
     @field:Size(min = 6) val password: String,
     @PhoneNumber val phoneNumber: String,
     val address: Set<Address>,
-    val coupons: Set<Coupon>
+    val coupons: Set<Coupon>,
 ) : Serializable

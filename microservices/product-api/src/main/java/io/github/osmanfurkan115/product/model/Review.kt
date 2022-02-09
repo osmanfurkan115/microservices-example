@@ -1,7 +1,6 @@
 package io.github.osmanfurkan115.product.model
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import org.hibernate.Hibernate
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -34,22 +33,6 @@ data class Review constructor(
     var active: Boolean = false,
 
     @CreatedDate
-    val createdDate: LocalDateTime
-
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Review
-
-        return id != null && id == other.id
-    }
-
-    override fun hashCode(): Int = javaClass.hashCode()
-
-    @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(id = $id )"
-    }
-}
+    val createdDate: LocalDateTime,
+)
 

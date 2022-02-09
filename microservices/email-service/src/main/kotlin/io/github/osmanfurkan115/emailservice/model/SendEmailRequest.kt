@@ -1,25 +1,3 @@
-package io.github.osmanfurkan115.product.model;
+package io.github.osmanfurkan115.emailservice.model
 
-public class SendEmailRequest {
-    private final String email;
-    private final String subject;
-    private final String message;
-
-    public SendEmailRequest(String email, String subject, String message) {
-        this.email = email;
-        this.subject = subject;
-        this.message = message;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-}
+class SendEmailRequest(val email: String, val subject: String, val message: String)

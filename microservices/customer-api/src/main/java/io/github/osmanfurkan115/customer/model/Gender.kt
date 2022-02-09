@@ -1,5 +1,5 @@
-package io.github.osmanfurkan115.customer.model;
+package io.github.osmanfurkan115.customer.model
 
-public enum Gender {
+enum class Gender {
     MALE, FEMALE
 }
