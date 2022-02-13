@@ -1,5 +1,6 @@
 package io.github.osmanfurkan115.customer.api;
 
+import io.github.osmanfurkan115.customer.model.dto.CreateCustomerRequest;
 import io.github.osmanfurkan115.customer.model.dto.CustomerDto;
 import io.github.osmanfurkan115.customer.service.CustomerService;
 import org.springframework.data.domain.Page;
@@ -28,8 +29,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody @Valid CustomerDto customerDto) {
-        return ResponseEntity.ok(customerService.saveCustomer(customerDto));
+    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody @Valid CreateCustomerRequest customerRequest) {
+        return ResponseEntity.ok(customerService.saveCustomer(customerRequest));
     }
 
     @PutMapping("/{customerId}/coupon/{couponId}")

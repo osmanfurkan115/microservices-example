@@ -1,7 +1,9 @@
 package io.github.osmanfurkan115.customer.service;
 
+import io.github.osmanfurkan115.customer.model.Basket;
 import io.github.osmanfurkan115.customer.model.Coupon;
 import io.github.osmanfurkan115.customer.model.Customer;
+import io.github.osmanfurkan115.customer.model.dto.CreateCustomerRequest;
 import io.github.osmanfurkan115.customer.model.dto.CustomerDto;
 import io.github.osmanfurkan115.customer.model.dto.mapper.CustomerMapper;
 import io.github.osmanfurkan115.customer.repository.CustomerRepository;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 @Service
 public class CustomerService {
@@ -39,12 +42,16 @@ public class CustomerService {
         return customerRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public CustomerDto saveCustomer(CustomerDto customerDto) {
-        final Customer customer = new Customer(customerDto.getId(), customerDto.getUserName(),
-                customerDto.getName(), customerDto.getGender(),
-                customerDto.getEmail(), customerDto.getPassword(),
-                customerDto.getPhoneNumber(), customerDto.getAddress(),
-                customerDto.getCoupons(), LocalDateTime.now());
+    public CustomerDto saveCustomer(CreateCustomerRequest request) {
+        final Basket basket = new Basket();
+        final Customer customer = new Customer(request.getId(), request.getUsername(),
+                request.getName(), request.getGender(),
+                request.getEmail(), request.getPassword(),
+                request.getPhoneNumber(), new HashSet<>(),
+                basket, new HashSet<>(),
+                LocalDateTime.now());
+        basket.setCustomer(customer);
+        customer.setBasket(basket);
         return customerMapper.customerToCustomerDto(customerRepository.save(customer));
     }
 

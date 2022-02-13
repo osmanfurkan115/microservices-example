@@ -40,6 +40,11 @@ data class Customer constructor(
     @JsonBackReference
     var address: Set<Address> = HashSet(),
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "customer")
+    @JoinColumn(name = "basket_id")
+    @JsonBackReference
+    var basket: Basket,
+
     @ManyToMany
     @JoinTable(name = "customer_coupons",
         joinColumns = [JoinColumn(name = "customer_id")],

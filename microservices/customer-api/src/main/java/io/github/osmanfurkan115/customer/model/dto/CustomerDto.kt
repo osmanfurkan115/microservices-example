@@ -1,6 +1,7 @@
 package io.github.osmanfurkan115.customer.model.dto
 
 import io.github.osmanfurkan115.customer.model.Address
+import io.github.osmanfurkan115.customer.model.Basket
 import io.github.osmanfurkan115.customer.model.Coupon
 import io.github.osmanfurkan115.customer.model.Gender
 import io.github.osmanfurkan115.customer.validation.annotation.PhoneNumber
@@ -20,5 +21,6 @@ data class CustomerDto(
     @field:Size(min = 6) val password: String,
     @PhoneNumber val phoneNumber: String,
     val address: Set<Address>,
+    val basket: Basket,
     val coupons: Set<Coupon>,
 ) : Serializable

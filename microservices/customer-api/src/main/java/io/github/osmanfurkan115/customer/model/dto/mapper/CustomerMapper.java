@@ -12,6 +12,6 @@ public class CustomerMapper {
                 customer.getName(), customer.getGender(),
                 customer.getEmail(), customer.getPassword(),
                 customer.getPhoneNumber(), customer.getAddress(),
-                customer.getCoupons());
+                customer.getBasket(), customer.getCoupons());
     }
 }
